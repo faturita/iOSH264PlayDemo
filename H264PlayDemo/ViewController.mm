@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "VideoFileParser.h"
+#import "VideoNetworkParser.h"
 #import "FFMPEGH264Decoder.h"
 #import "OpenGLView20.h"
 @interface ViewController ()
@@ -26,7 +27,7 @@
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo.h264" ofType:nil];
     NSLog(@"%@",filePath);
-    VideoFileParser *parser = [VideoFileParser alloc];
+    VideoNetworkParser *parser = [VideoNetworkParser alloc];
     [parser open:filePath];
     
     
@@ -37,11 +38,15 @@
     dispatch_queue_t decodeQueue = dispatch_queue_create("abc", NULL);
     dispatch_async(decodeQueue, ^{
         VideoPacket *vp = nil;
+        int toomanyerrors=0;
         while(true) {
             vp = [parser nextPacket];
             if(vp == nil) {
                 NSLog(@"Error reading next packet.");
-                //break;
+                toomanyerrors++;
+                if (toomanyerrors>1000000)
+                    break;
+                continue;
             }
             decoder->Decode(vp.buffer, vp.size);
             unsigned char *result = decoder->GetResultData();

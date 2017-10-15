@@ -11,9 +11,9 @@
 
 @implementation VideoNetworkParser
 
-- (NSInputStream*)fromNetwork
+- (NSInputStream*)openInputStream:(NSString *)fileName
 {
-    NSString *urlStr = @"192.168.0.109";
+    NSString *urlStr = @"192.168.0.105";
     
     if (![urlStr isEqualToString:@""]) {
         NSURL *website = [NSURL URLWithString:urlStr];
@@ -24,7 +24,7 @@
         
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
-        CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)@"192.168.0.109", 10000, &readStream, &writeStream);
+        CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)@"192.168.0.105", 10000, &readStream, &writeStream);
         
         NSInputStream *inputStream = (__bridge_transfer NSInputStream *)readStream;
         NSOutputStream *outputStream = (__bridge_transfer NSOutputStream *)writeStream;
@@ -41,19 +41,6 @@
         return inputStream;
     }
     return NULL;
-}
-
--(BOOL)open:(NSString *)fileName
-{
-    _bufferSize = 0;
-    _bufferCap = 512 * 1024;
-    _buffer = malloc(_bufferCap);
-    self.fileName = fileName;
-    //self.fileStream = [NSInputStream inputStreamWithFileAtPath:fileName];
-    self.fileStream = [self fromNetwork];
-    [self.fileStream open];
-    
-    return YES;
 }
 
 @end

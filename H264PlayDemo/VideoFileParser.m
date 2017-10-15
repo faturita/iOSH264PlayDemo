@@ -25,15 +25,15 @@ const uint8_t KStartCode[4] = {0, 0, 0, 1};
     NSInteger _bufferSize;
     NSInteger _bufferCap;
 }
-@property NSString *fileName;
-@property NSInputStream *fileStream;
+@property  NSString *fileName;
+@property  NSInputStream *fileStream;
 @end
 
 @implementation VideoFileParser
 
 - (NSInputStream*)fromNetwork
 {
-    NSString *urlStr = @"192.168.0.109";
+    NSString *urlStr = @"192.168.0.105";
     
     if (![urlStr isEqualToString:@""]) {
         NSURL *website = [NSURL URLWithString:urlStr];
@@ -44,7 +44,7 @@ const uint8_t KStartCode[4] = {0, 0, 0, 1};
         
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
-        CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)@"192.168.0.109", 10000, &readStream, &writeStream);
+        CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)@"192.168.0.105", 10000, &readStream, &writeStream);
         
         NSInputStream *inputStream = (__bridge_transfer NSInputStream *)readStream;
         NSOutputStream *outputStream = (__bridge_transfer NSOutputStream *)writeStream;
@@ -63,14 +63,25 @@ const uint8_t KStartCode[4] = {0, 0, 0, 1};
     return NULL;
 }
 
--(BOOL)open:(NSString *)fileName
+-(NSInputStream*)openInputStream:(NSString *)fileName
+{
+    return [NSInputStream inputStreamWithFileAtPath:fileName];
+}
+
+-(void)prepare
 {
     _bufferSize = 0;
     _bufferCap = 512 * 1024;
     _buffer = malloc(_bufferCap);
+}
+
+-(BOOL)open:(NSString *)fileName
+{
+    [self prepare];
+    
     self.fileName = fileName;
-    //self.fileStream = [NSInputStream inputStreamWithFileAtPath:fileName];
-    self.fileStream = [self fromNetwork];
+    self.fileStream = [self openInputStream:fileName];
+
     [self.fileStream open];
 
     return YES;
@@ -78,6 +89,11 @@ const uint8_t KStartCode[4] = {0, 0, 0, 1};
 
 -(VideoPacket*)nextPacket
 {
+    if (self.fileStream.hasBytesAvailable)
+    {
+        NSLog(@"Buffer is empty");
+    }
+    
     if(_bufferSize < _bufferCap && self.fileStream.hasBytesAvailable) {
         NSInteger readBytes = [self.fileStream read:_buffer + _bufferSize maxLength:_bufferCap - _bufferSize];
         _bufferSize += readBytes;

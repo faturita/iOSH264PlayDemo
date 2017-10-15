@@ -12,5 +12,6 @@
 -(BOOL)open:(NSString*)fileName;
 -(VideoPacket *)nextPacket;
 -(void)close;
+-(NSInputStream*)openInputStream:(NSString *)fileName;
 
 @end
