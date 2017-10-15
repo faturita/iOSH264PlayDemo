@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62D53E041F92F94D0054C026 /* VideoNetworkParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D53E031F92F94D0054C026 /* VideoNetworkParser.m */; };
 		C6058BDE1D20B5A100ADC2F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6058BDD1D20B5A100ADC2F7 /* main.m */; };
 		C6058BE11D20B5A100ADC2F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6058BE01D20B5A100ADC2F7 /* AppDelegate.m */; };
 		C6058BE41D20B5A100ADC2F7 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6058BE31D20B5A100ADC2F7 /* ViewController.mm */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62D53E021F92F94D0054C026 /* VideoNetworkParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoNetworkParser.h; sourceTree = "<group>"; };
+		62D53E031F92F94D0054C026 /* VideoNetworkParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoNetworkParser.m; sourceTree = "<group>"; };
 		C6058BD91D20B5A100ADC2F7 /* H264PlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = H264PlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6058BDD1D20B5A100ADC2F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C6058BDF1D20B5A100ADC2F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -251,6 +254,8 @@
 				C6058C101D20B5EE00ADC2F7 /* OpenGLView20.m */,
 				C6058C9B1D20BD4000ADC2F7 /* VideoFileParser.h */,
 				C6058C9C1D20BD4000ADC2F7 /* VideoFileParser.m */,
+				62D53E021F92F94D0054C026 /* VideoNetworkParser.h */,
+				62D53E031F92F94D0054C026 /* VideoNetworkParser.m */,
 				C6058C121D20B62D00ADC2F7 /* demo.h264 */,
 				C6058BE51D20B5A100ADC2F7 /* Main.storyboard */,
 				C6058BE81D20B5A100ADC2F7 /* Assets.xcassets */,
@@ -535,6 +540,7 @@
 				TargetAttributes = {
 					C6058BD81D20B5A100ADC2F7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2B4R6LQ42X;
 					};
 					C6058BF11D20B5A200ADC2F7 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -604,6 +610,7 @@
 				C6058BE41D20B5A100ADC2F7 /* ViewController.mm in Sources */,
 				C6058BE11D20B5A100ADC2F7 /* AppDelegate.m in Sources */,
 				C6058BDE1D20B5A100ADC2F7 /* main.m in Sources */,
+				62D53E041F92F94D0054C026 /* VideoNetworkParser.m in Sources */,
 				C6058C111D20B5EE00ADC2F7 /* OpenGLView20.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -747,6 +754,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2B4R6LQ42X;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/H264PlayDemo/FFmpeg-iOS/include";
 				INFOPLIST_FILE = H264PlayDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -754,7 +762,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/H264PlayDemo/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.auvi.H264PlayDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baufest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -763,6 +771,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2B4R6LQ42X;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/H264PlayDemo/FFmpeg-iOS/include";
 				INFOPLIST_FILE = H264PlayDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -770,7 +779,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/H264PlayDemo/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.auvi.H264PlayDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baufest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -840,6 +849,7 @@
 				C6058C081D20B5A200ADC2F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6058C091D20B5A200ADC2F7 /* Build configuration list for PBXNativeTarget "H264PlayDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -848,6 +858,7 @@
 				C6058C0B1D20B5A200ADC2F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6058C0C1D20B5A200ADC2F7 /* Build configuration list for PBXNativeTarget "H264PlayDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -856,6 +867,7 @@
 				C6058C0E1D20B5A200ADC2F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -137,7 +137,7 @@ enum TextureType
 
 - (void)layoutSubviews
 {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         @synchronized(self)
         {
             [EAGLContext setCurrentContext:_glContext];
@@ -147,6 +147,17 @@ enum TextureType
         
         glViewport(1, 1, self.bounds.size.width*_viewScale - 2, self.bounds.size.height*_viewScale - 2);
     });
+    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        @synchronized(self)
+//        {
+//            [EAGLContext setCurrentContext:_glContext];
+//            [self destoryFrameAndRenderBuffer];
+//            [self createFrameAndRenderBuffer];
+//        }
+//
+//        glViewport(1, 1, self.bounds.size.width*_viewScale - 2, self.bounds.size.height*_viewScale - 2);
+//    });
 }
 
 - (void)setupYUVTexture
@@ -233,10 +244,13 @@ enum TextureType
     glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
     
-    if (![_glContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer])
-    {
-        NSLog(@"attach渲染缓冲区失败");
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (![_glContext renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer])
+        {
+            NSLog(@"attach渲染缓冲区失败");
+        }
+    });
+    
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBuffer);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {

@@ -40,7 +40,8 @@
         while(true) {
             vp = [parser nextPacket];
             if(vp == nil) {
-                break;
+                NSLog(@"Error reading next packet.");
+                //break;
             }
             decoder->Decode(vp.buffer, vp.size);
             unsigned char *result = decoder->GetResultData();
